@@ -1,0 +1,10 @@
+{
+  "name": "language-mond",
+  "version": "1.0.0",
+  "description": "Atom language support for Mond",
+  "repository": "https://github.com/dajoh/language-mond",
+  "license": "MIT",
+  "engines": {
+    "atom": "*"
+  }
+}
