@@ -1,4 +1,35 @@
 '.source.mond':
+  # var, const, await
+  'var':
+    'prefix': 'var'
+    'body': 'var ${1:x} = $2;'
+  'const':
+    'prefix': 'const'
+    'body': 'const ${1:x} = $2;'
+  'await':
+    'prefix': 'await'
+    'body': 'var ${1:x} = yield $2;'
+
+  # function, sequence, lambda
+  'function':
+    'prefix': 'fun'
+    'body': """
+      fun ${1:name}($2) {
+          $3
+      }
+    """
+  'sequence':
+    'prefix': 'seq'
+    'body': """
+      seq ${1:name}($2) {
+          $3
+      }
+    """
+  'anonymous function':
+    'prefix': 'lam'
+    'body': '($1) -> ${2:body}'
+
+  # if, else if, else
   'if':
     'prefix': 'if'
     'body': """
@@ -9,7 +40,7 @@
   'else if':
     'prefix': 'elif'
     'body': """
-      else if ($1) {
+      else if (${1:true}) {
           $2
       }
     """
@@ -20,30 +51,47 @@
           $1
       }
     """
-  'foreach':
+
+  # for, foreach, while
+  'for loop':
+    'prefix': 'for'
+    'body': """
+      for (var ${1:i} = ${2:0}; i < ${3:n}; ${4:i++}) {
+          $5
+      }
+    """
+  'foreach loop':
     'prefix': 'foreach'
     'body': """
-      foreach (var ${1:x} in $2) {
+      foreach (var ${1:x} in ${2:list}) {
           $3
       }
     """
-  'fun':
-    'prefix': 'fun'
+  'while loop':
+    'prefix': 'while'
     'body': """
-      fun $1($2) {
-          $3
+      while (${1:true}) {
+          $2
       }
     """
-  'seq':
-    'prefix': 'seq'
+
+  # switch, case, default
+  'switch statement':
+    'prefix': 'switch'
     'body': """
-      seq $1($2) {
-          $3
+      switch (${1:x}) {
+          $2
       }
     """
-  'await':
-    'prefix': 'await'
-    'body': 'var ${1:x} = yield $2;'
-  'lambda':
-    'prefix': 'lam'
-    'body': '($1) -> $2'
+  'switch case':
+    'prefix': 'case'
+    'body': """
+      case $1:
+          $2
+    """
+  'switch default case':
+    'prefix': 'default'
+    'body': """
+      default:
+          $1
+    """

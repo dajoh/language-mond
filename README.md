@@ -1,7 +1,11 @@
 # Mond language support in Atom
 
 Adds syntax highlighting, snippets, and linting support for Mond in Atom.
-Linting requires the [linter](https://atom.io/packages/linter) package to be installed.
+
+For optimal pleasure, also use the following packages:
+* [linter](https://atom.io/packages/linter) (required for linting to work)
+* [autocomplete](https://atom.io/packages/autocomplete)
+* [autocomplete-snippets](https://atom.io/packages/autocomplete-snippets)
 
 ![Highlighting, snippets, and linting](https://raw.githubusercontent.com/dajoh/language-mond/master/example.gif)
 
