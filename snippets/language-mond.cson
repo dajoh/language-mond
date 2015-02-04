@@ -1,0 +1,49 @@
+'.source.mond':
+  'if':
+    'prefix': 'if'
+    'body': """
+      if (${1:true}) {
+          $2
+      }
+    """
+  'else if':
+    'prefix': 'elif'
+    'body': """
+      else if ($1) {
+          $2
+      }
+    """
+  'else':
+    'prefix': 'else'
+    'body': """
+      else {
+          $1
+      }
+    """
+  'foreach':
+    'prefix': 'foreach'
+    'body': """
+      foreach (var ${1:x} in $2) {
+          $3
+      }
+    """
+  'fun':
+    'prefix': 'fun'
+    'body': """
+      fun $1($2) {
+          $3
+      }
+    """
+  'seq':
+    'prefix': 'seq'
+    'body': """
+      seq $1($2) {
+          $3
+      }
+    """
+  'await':
+    'prefix': 'await'
+    'body': 'var ${1:x} = yield $2;'
+  'lambda':
+    'prefix': 'lam'
+    'body': '($1) -> $2'

@@ -3,4 +3,4 @@ module.exports =
     mondLintExecutablePath:
       type: 'string'
       default: ''
-      description: 'Executable path for mondx-lint'
+      description: 'Path to mondx-lint, excluding executable name'
