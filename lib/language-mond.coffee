@@ -5,10 +5,7 @@ Linter = require "#{linterPkg.path}/lib/linter"
 
 class LinterMond extends Linter
   @syntax: 'source.mond'
-
-  cmd: ['mondx-lint', '-ftool']
   linterName: 'mondx-lint'
-  executablePath: null
 
   regexLineCol:  '((?<line>\\d+):(?<col>\\d+): )?'
   regexRange:    '((?<lineStart>\\d+):(?<colStart>\\d+)-(?<lineEnd>\\d+):(?<colEnd>\\d+): )?'
@@ -17,6 +14,13 @@ class LinterMond extends Linter
 
   constructor: (editor)->
     super editor
+
+    builtin = atom.config.get 'language-mond.mondBuiltinSpecPath'
+    if builtin != ''
+      @cmd = ['mondx-lint', '-f', 'tool', '-b', builtin]
+    else
+      @cmd = ['mondx-lint', '-f', 'tool']
+
     @regex = @regexLineCol + @regexRange + @regexSeverity + @regexMessage
     @executablePath = atom.config.get 'language-mond.mondLintExecutablePath'
 
