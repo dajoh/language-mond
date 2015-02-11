@@ -15,14 +15,16 @@ class LinterMond extends Linter
   constructor: (editor)->
     super editor
 
-    builtin = atom.config.get 'language-mond.mondBuiltinSpecPath'
-    if builtin != ''
-      @cmd = ['mondx-lint', '-f', 'tool', '-b', builtin]
-    else
-      @cmd = ['mondx-lint', '-f', 'tool']
-
     @regex = @regexLineCol + @regexRange + @regexSeverity + @regexMessage
-    @executablePath = atom.config.get 'language-mond.mondLintExecutablePath'
+
+    @subscriptions.add atom.config.observe 'language-mond.mondBuiltinSpecPath', (x) =>
+      if x != ''
+        @cmd = ['mondx-lint', '-f', 'tool', '-b', x]
+      else
+        @cmd = ['mondx-lint', '-f', 'tool']
+
+    @subscriptions.add atom.config.observe 'language-mond.mondLintExecutablePath', (x) =>
+      @executablePath = x
 
   createMessage: (match) ->
     # If we don't get a range, make it a 1 character range.
